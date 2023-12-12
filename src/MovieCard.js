@@ -1,72 +1,29 @@
-import React from "react";
-import { useState } from "react";
-
-export default function MovieCard({movies,setMovies}) {
-
- 
-  const [formInputs, setFormInput] = useState({
-    title: "",
-    description: "",
-    rating: 0,
-    posteUrl: "",
-    
-  });
-  function handleAddClick() {
-  setMovies([...movies,formInputs])
-    
-      
-  
-     
-     
-    
-  }
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import StarRatingComponent from 'react-star-rating-component';
+const MovieCard = ({movie}) => {
   return (
-    
-    <form onSubmit={(event) => {
-      event.preventDefault();
-     
-       console.log(formInputs)
+    <div className='info' style={{  display:"flex",flexDirection:"row", width:"100%" } }>
+      <Card style={{ width: '18rem', borderRadius:"4px",border:"black solid 4px" } }>
+      <Card.Img variant="top" src={movie.posteUrl} />
+      <Card.Body>
+          <Card.Title>{movie.title }</Card.Title>
+        <Card.Text>
+            {movie.description}
+            <StarRatingComponent 
+          name="rate1" 
+          starCount={5}
+          value={movie.rating}
+            
+        />
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
+      </Card.Body>
+    </Card>
+    </div>
+  )
+}
 
-    }}>
-      <label>title:</label>
-      <input
-        value={formInputs.title}
-        onChange={(event) => {
-          setFormInput({...formInputs, title: event.target.value });
-        }}
-      />
-
-      <hr></hr>
-
-      <label>description:</label>
-      <input
-        value={formInputs.description}
-        onChange={(event) => {
-          setFormInput({...formInputs, description: event.target.value });
-        }}
-      />
-
-      <hr></hr>
-      <label>rating:</label>
-      <input
-        value={formInputs.rating}
-        onChange={(event) => {
-          setFormInput({...formInputs, rating: event.target.value });
-        }}
-      />
-
-      <hr></hr>
-      <label>posteUrl:</label>
-      <input
-        value={formInputs.posteUrl}
-        onChange={(event) => {
-          setFormInput({...formInputs, posteUrl: event.target.value });
-        }}
-      />
-
-      <hr></hr>
-
-      <button onClick={handleAddClick}>add movie</button>
-    </form>
-  );
-};
+export default MovieCard

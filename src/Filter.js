@@ -1,41 +1,22 @@
-import React from "react";
-import { useState } from "react";
-import { Card } from "react-bootstrap"; 
-export default function Filter() { 
-    const [inputFilter, setInputFilter] = useState({
-    title: "",
-    rating: "",
-    
-  });
-    return (
-    <form
-      
-    >
-      <label>title:</label>
-      <input
-        value={inputFilter.title}
-        onChange={(event) => {
-          setInputFilter({...inputFilter, title: event.target.value });
+import React, { useRef } from 'react'
+import StarRatingComponent from 'react-star-rating-component';
+
+const Filter = ({ rateFilter, setRateFilter, setTitleFilter }) => {
+  const a = useRef();
+  return (
+    <div>
+      <input type='text' placeholder=' title film  to find ' ref={a} onChange={() => setTitleFilter(a.current.value)}></input>
+      <StarRatingComponent 
+          name="rate1" 
+          starCount={5}
+          value={rateFilter}
+        onStarClick={(value) => {
+            setRateFilter(value)
         }}
+       
       />
-
-      <hr></hr>
-
-      
-
-      <hr></hr>
-      <label>rating:</label>
-      <input
-        value={inputFilter.rating}
-        onChange={(event) => {
-          setInputFilter({...inputFilter, rating: event.target.value });
-        }}
-      />
-
-      <hr></hr>
-      
-
-      <button>filter movie</button>
-    </form>
-  );
+    </div>
+  )
 }
+
+export default Filter
